@@ -47,7 +47,7 @@ if (! function_exists('SendNotificationUser')) {
             $fields = json_encode ( $fields );
         
             $headers = array (
-                    'Authorization: key=' . "AAAAlzpiQCQ:APA91bFOhw3A6F88lqJIACD94Tg-KzEa0d16S42Po9w26ruQN60xQRqh4HF6okFffsdMzfrtenkqLMCk2A3BAop2B1eoHDRyqVBlkYzNHiVLJ7zOZZBHHlX76tnt_YA_XgeJiFWPQhT8",
+                    'Authorization: key=' . "",
                     'Content-Type: application/json'
             );
         
