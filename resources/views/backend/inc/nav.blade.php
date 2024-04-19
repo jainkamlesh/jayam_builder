@@ -13,12 +13,18 @@
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
                 <li id="close-btn"><i class="fa fa-times js-logo-clone js-menu-toggle close-icn" aria-hidden="true"></i></li>
+                @if(Auth::user()->type == "admin") 	
                 <li><a href="{{route('users.index')}}">Users</a></li>
                 <li><a href="{{route('sites.index')}}">Sites</a></li></li>
-                <li><a href="{{route('inventories.index')}}">Inventories</a></li></li>
-                <li><a href="">Requirements</a></li>
-                <li><a href="">Bills</a></li>
-                <li><a href="">Accounting</a></li>
+                <li><a href="{{route('inventories.index')}}">Inventories</a></li></li> 
+                <li><a href="{{route('requirements.index')}}">Requirements</a></li>
+                <li><a href="{{route('bills.index')}}">Bills</a></li>
+                <li><a href="{{route('accounting.index')}}">Accounting</a></li>
+                @endif
+                @if(Auth::user()->type == "manager")
+                <li><a href="{{route('requirements.index')}}">Requirements</a></li>
+                <li><a href="{{route('bills.index')}}">Bills</a></li>
+                @endif
               </ul>
             </nav>
           </div>
