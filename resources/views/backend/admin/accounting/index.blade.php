@@ -7,12 +7,12 @@
 <section class="property-wrapper mt-4 user-wrapper">
     <form action="" method="get">
 
-          <div class="d-flex justify-content-between align-items-center container-fluid mt-4 pro-add-nnb">
+          <div class="d-flex  align-items-center container-fluid mt-4 pro-add-nnb">
             <div class="d-flex position-relative">
               <input type="text" name="search" placeholder="Search Bill" class="prop-inp radius-0" value="{{$sort_search}}">
               <i class="fa fa-search srch-icn-vg" aria-hidden="true"></i>
             </div>  
-            <div class="d-flex position-relative mt-2">
+            <div class="d-flex position-relative top-margin">
               <select class="prop-inp radius-0" name="site_id">
                 <option value="">All Site</option>
                 @foreach (\App\Models\Site::get() as $site)      
@@ -20,17 +20,20 @@
                 @endforeach
               </select>
             </div>
-            <div class="d-flex position-relative mt-2">
+            <div class="d-flex position-relative top-margin">
               <input type="date" name="startdate"  class="prop-inp radius-0" value="{{$startdate}}">
+            </div>  
+            <div class="d-flex position-relative top-margin">
               <input type="date" name="enddate"  class="prop-inp radius-0" value="{{$enddate}}">
             </div>
-          </div>
-
-          <div class="d-flex justify-content-between align-items-center container-fluid pro-add-nnb">
-            <div class="d-flex position-relative">
+            <div class="d-flex position-relative top-margin">
               <button class="btn-add radius-0 w-50" type="submit"><i class="fa fa-search"></i></button>
               <a class="btn btn-danger radius-0 w-50" href="{{route('accounting.index')}}"><i class="fa fa-remove"></i></a>
            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center container-fluid pro-add-nnb bill-button">
+            <div class="d-flex position-relative">
+            </div>
              <a href="{{route('accounting.create')}}"><button class="btn-add add-btn" type="button"><i class="fa fa-plus" aria-hidden="true"></i>Add Accounting</button></a>
           </div>        
     </form>

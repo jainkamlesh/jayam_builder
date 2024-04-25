@@ -808,7 +808,7 @@ a{text-decoration: none;}
   border: 1px solid #fff !important;
   box-shadow: 0 0 7px 0px #ccc;
   padding: 10px 15px 10px 38px;
-  width: 400px;
+  width: auto;
   border-radius: 50px;
   margin-right: 10px;
 }
@@ -3028,4 +3028,8 @@ border-bottom: 1px solid #d4d4d4;
 } */
 .radius-0{
   border-radius: 0px;
+}
+
+.bill-button{
+  margin-top: 20px;
 }

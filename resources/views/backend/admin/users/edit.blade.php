@@ -19,15 +19,6 @@
         @enderror 
       </div>
       <div class="col-sm-12 mt-3">
-        <label>Username:</label>                            
-        <input type="text" class="form-control" name="username" placeholder="Enter Username" value="{{ $user->username }}" disabled>
-        @error('username')
-            <span class="text-danger" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-      </div>
-      <div class="col-sm-12 mt-3">
         <label>Change Password:</label>                            
         <input type="password" class="form-control" name="password" placeholder="Enter Password" >
         @error('password')
@@ -57,8 +48,9 @@
       <div class="col-sm-12 mt-3 ">
         <label>User Type :</label>
         <select class="form-control" name="user_type">
-          <option value="0" @if($user->user_type == 0) selected @endif>Supervisor</option>
-          <option value="2" @if($user->user_type == 2) selected @endif>Manager</option>
+          <option value="0" @if($user->type == 0) selected @endif>Manager</option>
+          <option value="2" @if($user->type == 2) selected @endif>Supervisor</option>
+          <option value="1" @if($user->type == 1) selected @endif>Admin</option>
         </select>
         @error('user_type')
         <span class="text-danger" role="alert">

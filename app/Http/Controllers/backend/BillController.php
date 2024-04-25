@@ -109,7 +109,8 @@ class BillController extends Controller
     {
         $inventories=Inventory::where('status',1)->get();
         $bill = Bill::find($id);
-        return view('backend.admin.bills.edit',compact('bill','inventories'));
+        $sites=Site::where('status',1)->get();
+        return view('backend.admin.bills.edit',compact('bill','inventories','sites'));
     }
 
     /**

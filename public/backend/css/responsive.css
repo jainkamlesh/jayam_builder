@@ -442,6 +442,13 @@
 	.dash-table-pg td:nth-child(n){
 		text-align: right ;
 	}
+	.top-margin{
+		margin-top: 15px;
+	}
+
+	.bill-button{
+		margin-top: 5px!important;
+	}
 
 }
 

@@ -22,9 +22,10 @@
             <tr class="ft-tr">
                 <th>ID</th>
                 <th>Name</th>
-                <th>User Name</th>
                 <th>Email</th>
                 <th>Mobile</th>
+                <th>Site</th>
+                <th>User Type</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -33,9 +34,10 @@
                 <tr>
                     <td scope="row" data-label="ID">{{$user->id}}</td>
                     <td data-label="name">{{$user->name}}</td>
-                    <td data-label="username">{{$user->username}}</td>
                     <td data-label="email">{{$user->email}}</td>
                     <td data-label="mobile">{{$user->phone ?? "N/A"}}</td>
+                    <td data-label="user_type">{{$user->site->name ?? "N/A"}}</td>
+                    <td data-label="user_type">{{ucfirst($user->type)}}</td>
                     <td data-label="Action" class="action-list">
                         <div class="d-inline-flex">
                             <a href="{{route('users.edit',$user->id)}}" class="icon edit edit-icon">

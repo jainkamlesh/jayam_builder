@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $sort_search = null;
-        $users = User::orderBy('created_at', 'desc')->whereIn('type',[0,2]);
+        $users = User::orderBy('created_at', 'desc');
         if ($request->has('search') && $request->search!=""){
             $sort_search=$request->search;
             $users->where('name', 'LIKE', "%$sort_search%")->orWhere('username', 'LIKE', "%$sort_search%")->orWhere('phone', 'LIKE', "%$sort_search%");
@@ -40,7 +40,6 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'username' => 'required',
             'email' => 'required|email|unique:users',
             'phone' => 'required',
             'password' => 'required',
@@ -49,7 +48,6 @@ class UserController extends Controller
         ]);
         $user = new User;
         $user->name = $request->name;
-        $user->username = $request->username;
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->password = bcrypt($request->password);

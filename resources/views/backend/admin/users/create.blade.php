@@ -10,7 +10,7 @@
             @csrf
       <div class="col-sm-12 mt-3">
         <label>Name :</label>
-        <input type="text" class="form-control" name="name" placeholder="Enter Name">
+        <input type="text" class="form-control" name="name" placeholder="Enter Name" value="{{old('name')}}">
         @error('name')
             <span class="text-danger" role="alert">
                 <strong>{{ $message }}</strong>
@@ -18,26 +18,8 @@
         @enderror 
       </div>
       <div class="col-sm-12 mt-3">
-        <label>Username:</label>                            
-        <input type="text" class="form-control" name="username" placeholder="Enter Username">
-        @error('username')
-            <span class="text-danger" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-      </div>
-      <div class="col-sm-12 mt-3">
-        <label>Password:</label>                            
-        <input type="password" class="form-control" name="password" placeholder="Enter Password">
-        @error('password')
-            <span class="text-danger" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-      </div>
-      <div class="col-sm-12 mt-3">
         <label>Email:</label>                            
-        <input type="email" class="form-control" name="email" placeholder="Enter Email">
+        <input type="email" class="form-control" name="email" placeholder="Enter Email" value="{{old('email')}}">
         @error('email')
             <span class="text-danger" role="alert">
                 <strong>{{ $message }}</strong>
@@ -45,8 +27,17 @@
         @enderror
       </div>
       <div class="col-sm-12 mt-3">
+        <label>Password:</label>                            
+        <input type="password" class="form-control" name="password" placeholder="Enter Password" >
+        @error('password')
+            <span class="text-danger" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+      </div>
+      <div class="col-sm-12 mt-3">
         <label>Mobile No.:</label>                            
-        <input type="text" class="form-control" name="phone" placeholder="Enter Mobile No.">
+        <input type="text" class="form-control" name="phone" placeholder="Enter Mobile No." value="{{old('phone')}}">
         @error('phone')
             <span class="text-danger" role="alert">
                 <strong>{{ $message }}</strong>
@@ -56,8 +47,9 @@
       <div class="col-sm-12 mt-3 ">
         <label>User Type :</label>
         <select class="form-control" name="user_type">
-          <option value="0">Supervisor</option>
-          <option value="2">Manager</option>
+          <option value="0">Manager</option>
+          <option value="2">Supervisor</option>
+          <option value="1">Admin</option>
         </select>
         @error('user_type')
         <span class="text-danger" role="alert">

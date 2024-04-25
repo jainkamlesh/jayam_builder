@@ -20,7 +20,7 @@
 					</div>
 					<div>
 						<h5>Users</h5>
-						<h6>{{\App\Models\User::whereIn('type',[0,2])->count()}}</h6>
+						<h6>{{\App\Models\User::count()}}</h6>
 					</div>
 				</center>
 			</div>
