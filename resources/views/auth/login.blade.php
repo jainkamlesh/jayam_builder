@@ -5,8 +5,39 @@
 <div class="site-login mt-0 site-wrap">
   <!-- login form -->
   <section class="login-block content-wrapper mt-0 p-0">
+    <div class="site-navbar">
+        <div class="container-fluid">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="logo">
+              <div class="site-logo">
+                <a href="{{route('home')}}" class="js-logo-clone">
+                    <img src="{{asset('backend/images/logo.png')}}" alt="">
+                </a>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div class="main-nav d-none d-lg-block">
+                <nav class="site-navigation text-right text-md-center" role="navigation">
+                  <ul class="site-menu js-clone-nav d-none d-lg-block">
+                    <li id="close-btn"><i class="fa fa-times js-logo-clone js-menu-toggle close-icn" aria-hidden="true"></i></li>
+                    <li class="active"><a href="{{route('home')}}">Login</a></li>
+                    <li><a href="{{route('aboutus')}}">About us</a></li>
+                  </ul>
+                </nav>
+              </div>
+              <div class="icons d-flex align-items-center user-dropdown">
+                <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><img src="{{asset('backend/images/menu-icn.svg')}}" width="20"></a>
+                <div class="dropdown" style="margin-left: 20px;">
+                  <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('backend/images/profile.svg')}}" width="30">
+                  </a>
+                </div>
+              </div>
+            </div>  
+          </div>
+        </div>
+      </div>
       <div class="container pr-0">
-          <div class="row">
+          <div class="row mt-5">
               <div class="col-md-12 col-sm-12 col-lg-4 login-sec ">
                   <h2 class="text-center">Login Now</h2>
                     <form class="login-form pt-4" method="POST" action="{{ route('login') }}">

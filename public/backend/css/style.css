@@ -343,7 +343,7 @@ a{text-decoration: none;}
          .site-navbar .site-navigation .site-menu > li.active:after{
           content: "";
           position: absolute;
-          border-bottom: 3px solid #6a53a8;
+          border-bottom: 3px solid #1079bd;
           width: 100%;
           left: 0;
           bottom: 0;
@@ -824,9 +824,9 @@ a{text-decoration: none;}
 }
 /*login*/
 .site-login{
-  display: flex;
+  display: block;
   align-items: center;
-  height: 100vh;
+  height: auto;
 }
 .login-block .container {
   box-shadow: 0px 5px 20px 0px #3243593d;
@@ -836,7 +836,7 @@ a{text-decoration: none;}
 .site-login .login-block {
   width: 100%;
   padding: 70px 0;
-  margin-top: 105px;
+  margin-top: 0px!important;
 }
 .site-login .banner-sec {
   background-size: cover;
@@ -3032,4 +3032,8 @@ border-bottom: 1px solid #d4d4d4;
 
 .bill-button{
   margin-top: 20px;
+}
+
+.rupee{
+  width: 10px;
 }

@@ -18,6 +18,9 @@ class BillController extends Controller
         $site_id = null;
         $startdate = null;
         $enddate = null;
+        $total_credit = Bill::where('type','CR')->sum('amount') ?? 0;
+        $total_debit = Bill::where('type','DR')->sum('amount') ?? 0;
+        $total_grand = $total_credit-$total_debit;
         $bills = Bill::orderBy('created_at', 'desc');
         if(Auth::user()->type == "manager"){
             $bills->where('user_id',Auth::user()->id);
@@ -48,7 +51,7 @@ class BillController extends Controller
             $bills->whereBetween('created_at', [$startdate, $enddate]);
         }
         $bills = $bills->paginate(10);
-        return view('backend.admin.bills.index', compact('bills', 'sort_search','site_id','manager_id','startdate','enddate'));
+        return view('backend.admin.bills.index', compact('bills', 'sort_search','site_id','manager_id','startdate','enddate','total_credit','total_debit','total_grand'));
     }
 
     /**

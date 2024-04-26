@@ -55,4 +55,8 @@ class HomeController extends Controller
        }
    }
 
+   function aboutus(){
+        return view('backend.aboutus');
+   }
+
 }

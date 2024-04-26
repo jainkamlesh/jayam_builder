@@ -58,6 +58,16 @@
           @endif        
     </form>
     <div class="container-fluid">
+      @if(Auth::user()->type == "admin")
+      <table class="mt-4 pro-table-pg table-hover wrapper">
+        <tr >
+            <td  data-label="Debit" class="bg-success text-white"><strong>Total Credit : <i class="fa fa-inr"></i> {{$total_credit}}</strong></td>
+            <td  data-label="Credit" class="bg-danger text-white"><strong>Total Debit : <i class="fa fa-inr"></i> {{$total_debit}}</strong></td>
+            <td  data-label="Grand Total" class="bg-primary text-white"><strong>Grand Total : <i class="fa fa-inr"></i> {{$total_grand}}</strong></td>
+            <td colspan="5"></td>
+        </tr>
+      </table>  
+      @endif
       @if($bills->count() > 0)  
         <table class="mt-4 pro-table-pg table-hover wrapper">
             <thead>
@@ -79,7 +89,7 @@
                     <td data-label="Manager Name">{{$bill->user->name ?? "N/A"}}</td>
                     <td data-label="Site">{{$bill->site->name ?? $bill->site_name}}</td>
                     <td data-label="Inventory">{{$bill->inventory->name ?? $bill->inventory_name}}</td>
-                    <td data-label="Amount">₹{{$bill->amount ?? "N/A"}} @if($bill->type == "CR") <span class="badge bg-success text-white mx-2"> {{$bill->type}}</span> @else <span class="badge bg-danger text-white mx-2">{{$bill->type}}</span> @endif</td>
+                    <td data-label="Amount"><i class="fa fa-inr"></i> {{$bill->amount ?? "N/A"}} @if($bill->type == "CR") <span class="badge bg-success text-white mx-2"> {{$bill->type}}</span> @else <span class="badge bg-danger text-white mx-2">{{$bill->type}}</span> @endif</td>
                     <td data-label="comment">{{$bill->comment ?? "N/A"}}</td>
                     <td data-label="Bill" @if($bill->image!="") class="text-center"  @endif>
                       @if($bill->image!="")
@@ -102,6 +112,14 @@
                         </td>
                     </tr>
                 @endforeach
+                @if(Auth::user()->type == "admin")
+                  <tr>
+                    <td colspan="5"></td>
+                    <td colspan="1" data-label="Debit" class="bg-success text-white"><strong>Total Credit : <i class="fa fa-inr"></i> {{$total_credit}}</strong></td>
+                    <td colspan="1" data-label="Credit" class="bg-danger text-white"><strong>Total Debit : <i class="fa fa-inr"></i> {{$total_debit}}</strong></td>
+                    <td colspan="1" data-label="Grand Total" class="bg-primary text-white"><strong>Grand Total : <i class="fa fa-inr"></i> {{$total_grand}}</strong></td>
+                  </tr>
+                @endif
             </tbody>
         </table>
       @else

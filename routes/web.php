@@ -23,7 +23,7 @@ use App\Http\Controllers\backend\AccountingController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/logout_user', [HomeController::class, 'logout_user'])->name('logout_user');
-
+Route::get('/about-us', [HomeController::class, 'aboutus'])->name('aboutus');
 /*------------------------------------------
 --------------------------------------------
 All Admin Routes List

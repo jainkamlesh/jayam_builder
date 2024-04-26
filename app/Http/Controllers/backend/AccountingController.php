@@ -17,6 +17,9 @@ class AccountingController extends Controller
         $site_id = null;
         $startdate = null;
         $enddate = null;
+        $total_credit = Accounting::where('type','CR')->sum('amount') ?? 0;
+        $total_debit = Accounting::where('type','DR')->sum('amount') ?? 0;
+        $total_grand = $total_credit-$total_debit;
         $accounting = Accounting::orderBy('created_at', 'desc');
 
         if($request->site_id !=""){
@@ -35,7 +38,7 @@ class AccountingController extends Controller
             $accounting->whereBetween('accounting_date', [$startdate, $enddate]);
         }
         $accounting = $accounting->paginate(10);
-        return view('backend.admin.accounting.index', compact('accounting', 'sort_search','site_id','startdate','enddate'));
+        return view('backend.admin.accounting.index', compact('accounting', 'sort_search','site_id','startdate','enddate','total_credit','total_debit','total_grand'));
     }
 
     /**

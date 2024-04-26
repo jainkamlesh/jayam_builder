@@ -450,6 +450,10 @@
 		margin-top: 5px!important;
 	}
 
+	.rupee{
+		width: 7px;
+	  }
+
 }
 
 @media (max-width: 360px) {
