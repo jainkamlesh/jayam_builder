@@ -8,6 +8,12 @@ use App\Http\Controllers\backend\InventoryController;
 use App\Http\Controllers\backend\RequirementController;
 use App\Http\Controllers\backend\BillController;
 use App\Http\Controllers\backend\AccountingController;
+use App\Http\Controllers\backend\AccountingTwoController;
+use App\Http\Controllers\backend\DealerController;
+use App\Http\Controllers\backend\MaterialController;
+
+
+
 
 
 /*
@@ -53,6 +59,16 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::resource('accounting', AccountingController::class);
     Route::get('accounting/destory/{id}', [AccountingController::class, 'destroy'])->name('accounting.destory');
+
+    Route::resource('accountingtwo', AccountingTwoController::class)->middleware(['user-access:admin']);
+    Route::get('accountingtwo/destory/{id}', [AccountingTwoController::class, 'destroy'])->name('accountingtwo.destory')->middleware(['user-access:admin']);
+    Route::get('accountingtwo/status/{id}/{status}', [AccountingTwoController::class, 'status'])->name('accountingtwo.status')->middleware(['user-access:admin']);
+
+    Route::resource('dealers', DealerController::class)->middleware(['user-access:admin']);
+    Route::get('dealers/destory/{id}', [DealerController::class, 'destroy'])->name('dealers.destory')->middleware(['user-access:admin']);
+
+    Route::resource('materials', MaterialController::class);
+    Route::get('materials/destory/{id}', [MaterialController::class, 'destroy'])->name('materials.destory');
 });
   
 Route::fallback(function () {

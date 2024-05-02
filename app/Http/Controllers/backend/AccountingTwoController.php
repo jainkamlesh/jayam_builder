@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
-use App\Models\Accounting;
+use App\Models\AccountingTwo;
 use App\Models\Site;
+use App\Models\Inventory;
 use Illuminate\Http\Request;
-use Auth;
-class AccountingController extends Controller
+
+class AccountingTwoController extends Controller
 {
-   /**
+ /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
@@ -17,10 +18,10 @@ class AccountingController extends Controller
         $site_id = null;
         $startdate = null;
         $enddate = null;
-        $total_credit = Accounting::where('type','CR')->sum('amount') ?? 0;
-        $total_debit = Accounting::where('type','DR')->sum('amount') ?? 0;
+        $total_credit =AccountingTwo::where('type','CR')->sum('amount') ?? 0;
+        $total_debit =AccountingTwo::where('type','DR')->sum('amount') ?? 0;
         $total_grand = $total_credit-$total_debit;
-        $accounting = Accounting::orderBy('created_at', 'desc');
+        $accounting =AccountingTwo::orderBy('created_at', 'desc');
 
         if($request->site_id !=""){
             $site_id =$request->site_id;
@@ -38,7 +39,7 @@ class AccountingController extends Controller
             $accounting->whereBetween('accounting_date', [$startdate, $enddate]);
         }
         $accounting = $accounting->paginate(10);
-        return view('backend.admin.accounting.index', compact('accounting', 'sort_search','site_id','startdate','enddate','total_credit','total_debit','total_grand'));
+        return view('backend.admin.accountingtwo.index', compact('accounting', 'sort_search','site_id','startdate','enddate','total_credit','total_debit','total_grand'));
     }
 
     /**
@@ -47,7 +48,8 @@ class AccountingController extends Controller
     public function create()
     {
         $sites=Site::get();
-        return view('backend.admin.accounting.create',compact('sites'));
+        $inventories=Inventory::where('status',1)->get();
+        return view('backend.admin.accountingtwo.create',compact('sites','inventories'));
     }
 
     /**
@@ -60,25 +62,29 @@ class AccountingController extends Controller
             'amount' => 'required',
             'accounting_date' => 'required',
         ]);
-        $accounting = new Accounting;
+        $accounting = new AccountingTwo;
         $accounting->site_id = $request->site_id;
         $accounting->site_name = Site::find($request->site_id)->name ?? "";
+        $accounting->gst_no = $request->gst_no;
+        $accounting->gst_percentage = $request->gst_percentage;
         $accounting->amount = $request->amount;
+        $accounting->gst_credit = $request->gst_credit;
+        $accounting->inventory = $request->inventory;
+        $accounting->inventory_name = Inventory::find($request->inventory)->name ?? "";
         $accounting->type = $request->type;
-        $accounting->comment = $request->comment;
         $accounting->accounting_date = $request->accounting_date;
         if($request->hasFile('image')){
-            $mainpath='uploads/accounting';
+            $mainpath='uploads/account_two';
             $folder = public_path($mainpath);
             $fileName = date('Ymd').time().'.'.$request->image->extension();  
             $request->image->move($folder,$fileName);
             $accounting->image = $mainpath."/". $fileName;
         }
         if($accounting->save()){
-            return redirect()->route('accounting.index')
+            return redirect()->route('accountingtwo.index')
             ->with('success','Added Succefully.');
         }
-        return redirect()->route('accounting.index')
+        return redirect()->route('accountingtwo.index')
         ->with('error','Something went wrong!');
     }
 
@@ -95,9 +101,10 @@ class AccountingController extends Controller
      */
     public function edit($id)
     {
-        $accounting = Accounting::find($id);
+        $accounting =AccountingTwo::find($id);
         $sites=Site::get();
-        return view('backend.admin.accounting.edit',compact('accounting','sites'));
+        $inventories=Inventory::where('status',1)->get();
+        return view('backend.admin.accountingtwo.edit',compact('accounting','sites','inventories'));
     }
 
     /**
@@ -110,15 +117,19 @@ class AccountingController extends Controller
             'amount' => 'required',
             'accounting_date' => 'required',
         ]);
-        $accounting = Accounting::find($id);
+        $accounting =AccountingTwo::find($id);
         $accounting->site_id = $request->site_id;
         $accounting->site_name = Site::find($request->site_id)->name ?? "";
+        $accounting->gst_no = $request->gst_no;
+        $accounting->gst_percentage = $request->gst_percentage;
         $accounting->amount = $request->amount;
+        $accounting->gst_credit = $request->gst_credit;
+        $accounting->inventory = $request->inventory;
+        $accounting->inventory_name = Inventory::find($request->inventory)->name ?? "";
         $accounting->type = $request->type;
-        $accounting->comment = $request->comment;
         $accounting->accounting_date = $request->accounting_date;
         if($request->hasFile('image')){
-            $mainpath='uploads/accounting';
+            $mainpath='uploads/account_two';
             $folder = public_path($mainpath);
             if(isset($accounting->image) && $accounting->image != ""){
                 $path  =  asset($accounting->image);
@@ -133,10 +144,10 @@ class AccountingController extends Controller
         }
 
         if($accounting->save()){
-            return redirect()->route('accounting.index')
+            return redirect()->route('accountingtwo.index')
             ->with('success','Updated Succefully.');
         }
-        return redirect()->route('accounting.index')
+        return redirect()->route('accountingtwo.index')
         ->with('error','Something went wrong!');
     }
 
@@ -145,7 +156,7 @@ class AccountingController extends Controller
      */
     public function destroy(Request $request)
     {
-        $accounting = Accounting::where('id', $request->id)->first();
+        $accounting =AccountingTwo::where('id', $request->id)->first();
         if(isset($accounting->image) && $accounting->image != ""){
             $path  =  asset($accounting->image);
             if(file_exists($path))
@@ -154,10 +165,22 @@ class AccountingController extends Controller
             }
         }
         if($accounting->delete()){
-            return redirect()->route('accounting.index')
+            return redirect()->route('accountingtwo.index')
             ->with('success','Deleted Succefully.');
         }
-        return redirect()->route('requirements.index')
+        return redirect()->route('accountingtwo.index')
+        ->with('error','Something went wrong!');
+    }
+
+    public function status($id,$status)
+    {
+        $accounting = AccountingTwo::find($id);
+        $accounting->status = $status;
+        if($accounting->save()){
+            return redirect()->route('accountingtwo.index')
+            ->with('success','Accounting Updated Succefully.');
+        }
+        return redirect()->route('accountingtwo.index')
         ->with('error','Something went wrong!');
     }
 }

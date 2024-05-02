@@ -88,7 +88,7 @@
                     <td scope="row" data-label="ID">{{$bill->id}}</td>
                     <td data-label="Manager Name">{{$bill->user->name ?? "N/A"}}</td>
                     <td data-label="Site">{{$bill->site->name ?? $bill->site_name}}</td>
-                    <td data-label="Inventory">{{$bill->inventory->name ?? $bill->inventory_name}}</td>
+                    <td data-label="Inventory">{{$bill->inventory->name ?? $bill->inventory_name ?? "N/A"}}</td>
                     <td data-label="Amount"><i class="fa fa-inr"></i> {{$bill->amount ?? "N/A"}} @if($bill->type == "CR") <span class="badge bg-success text-white mx-2"> {{$bill->type}}</span> @else <span class="badge bg-danger text-white mx-2">{{$bill->type}}</span> @endif</td>
                     <td data-label="comment">{{$bill->comment ?? "N/A"}}</td>
                     <td data-label="Bill" @if($bill->image!="") class="text-center"  @endif>

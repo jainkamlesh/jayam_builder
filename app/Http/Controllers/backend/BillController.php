@@ -69,15 +69,21 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'inventory_id' => 'required',
-            'amount' => 'required'
-        ]);
+        if(Auth::user()->type == "manager"){
+            $validatedData = $request->validate([
+                'inventory_id' => 'required',
+                'amount' => 'required'
+            ]);
+        }else{
+            $validatedData = $request->validate([
+                'amount' => 'required'
+            ]);
+        }
         $bill = new Bill;
         $bill->site_id = $request->site_id;
         $bill->site_name = Site::find($request->site_id)->name ?? "";
-        $bill->inventory_id = $request->inventory_id;
-        $bill->inventory_name = Inventory::find($request->inventory_id)->name ?? "";
+        $bill->inventory_id = $request->inventory_id ?? null;
+        $bill->inventory_name = Inventory::find($request->inventory_id)->name ?? null;
         $bill->amount = $request->amount;
         $bill->comment = $request->comment;
         $bill->type = $request->type;
@@ -121,15 +127,21 @@ class BillController extends Controller
      */
     public function update(Request $request,$id)
     {
-        $validatedData = $request->validate([
-            'inventory_id' => 'required',
-            'amount' => 'required'
-        ]);
+        if(Auth::user()->type == "manager"){
+            $validatedData = $request->validate([
+                'inventory_id' => 'required',
+                'amount' => 'required'
+            ]);
+        }else{
+            $validatedData = $request->validate([
+                'amount' => 'required'
+            ]);
+        }
         $bill = Bill::find($id);
         $bill->site_id = $request->site_id;
         $bill->site_name = Site::find($request->site_id)->name ?? $bill->site_name;
-        $bill->inventory_id = $request->inventory_id;
-        $bill->inventory_name = Inventory::find($request->inventory_id)->name ?? "";
+        $bill->inventory_id = $request->inventory_id ?? null;
+        $bill->inventory_name = Inventory::find($request->inventory_id)->name ?? null;
         $bill->amount = $request->amount;
         $bill->comment = $request->comment;
         if($request->hasFile('image')){

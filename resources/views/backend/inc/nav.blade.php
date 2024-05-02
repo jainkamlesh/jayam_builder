@@ -20,10 +20,14 @@
                 <li><a href="{{route('requirements.index')}}">Requirements</a></li>
                 <li><a href="{{route('bills.index')}}">Bills</a></li>
                 <li><a href="{{route('accounting.index')}}">Accounting</a></li>
+                <li><a href="{{route('dealers.index')}}">Dealers</a></li>
+                <li><a href="{{route('accountingtwo.index')}}">Accounting Two</a></li>
+                <li><a href="{{route('materials.index')}}">Materials</a></li>
                 @endif
                 @if(Auth::user()->type == "manager")
                 <li><a href="{{route('requirements.index')}}">Requirements</a></li>
                 <li><a href="{{route('bills.index')}}">Bills</a></li>
+                <li><a href="{{route('materials.index')}}">Materials</a></li>
                 @endif
               </ul>
             </nav>

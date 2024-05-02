@@ -104,6 +104,55 @@
 			</div>
 		</a>
 	  </div>
+
+	  <div class="col-md-2 col-6 mt-2">
+		<a href="{{route('accountingtwo.index')}}">
+			<div class="order-box green-box">
+				<center>
+					<div class="ord-icn green-icn">
+					<i class="fa fa-calculator" aria-hidden="true"></i>
+					</div>
+					<div>
+					<h5>Accounting Two</h5>
+					<h6>{{\App\Models\AccountingTwo::count()}}</h6>
+					</div>
+				</center>
+			</div>
+		</a>
+	  </div>
+
+	  <div class="col-md-2 col-6 mt-2">
+		<a href="{{route('dealers.index')}}">
+			<div class="order-box blue-box">
+				<center>
+					<div class="ord-icn blue-icn">
+						<i class="fa fa-user"></i>
+					</div>
+					<div>
+						<h5>Dealers</h5>
+						<h6>{{\App\Models\Dealer::count()}}</h6>
+					</div>
+				</center>
+			</div>
+		</a>
+	  </div>
+
+	  <div class="col-md-2 col-6 mt-2">
+		<a href="{{route('materials.index')}}">
+			<div class="order-box ">
+				<center>
+					<div class="ord-icn ">
+						<i class="fa fa-truck"></i>
+					</div>
+					<div>
+						<h5>Materials</h5>
+						<h6>{{\App\Models\Material::count()}}</h6>
+					</div>
+				</center>
+			</div>
+		</a>
+	  </div>
+
 	</div>
   </div>
   @endif
@@ -142,6 +191,23 @@
 			</div>
 		</a>
 	  </div>
+
+	  <div class="col-md-2 col-6 mt-2">
+		<a href="{{route('materials.index')}}">
+			<div class="order-box green-box">
+				<center>
+					<div class="ord-icn green-icn">
+						<i class="fa fa-truck"></i>
+					</div>
+					<div>
+						<h5>Materials</h5>
+						<h6>{{\App\Models\Material::where('user_id',Auth::user()->id)->count()}}</h6>
+					</div>
+				</center>
+			</div>
+		</a>
+	  </div>
+
 	</div>
   </div>
   @endif

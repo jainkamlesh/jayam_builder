@@ -37,19 +37,21 @@
               @enderror
             </div>
             @endif
-        <div class="col-sm-12 mt-3 ">
-          <label>Inventory :</label>
-          <select class="form-control" name="inventory_id">
-              @foreach ($inventories as $inventory)      
-                  <option value="{{$inventory->id}}">{{$inventory->name}}</option>
-              @endforeach
-          </select>
-          @error('inventory_id')
-            <span class="text-danger" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-          @enderror
-        </div> 
+            @if(Auth::user()->type == "manager")
+              <div class="col-sm-12 mt-3 ">
+                <label>Inventory :</label>
+                <select class="form-control" name="inventory_id">
+                    @foreach ($inventories as $inventory)      
+                        <option value="{{$inventory->id}}">{{$inventory->name}}</option>
+                    @endforeach
+                </select>
+                @error('inventory_id')
+                  <span class="text-danger" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div> 
+            @endif
         <div class="col-sm-12 mt-3">
           <label>Amount:</label>                            
           <input type="text" class="form-control" name="amount" placeholder="Enter Amount" value="{{$bill->amount}}">
