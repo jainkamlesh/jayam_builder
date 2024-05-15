@@ -18,27 +18,44 @@ class BillController extends Controller
         $site_id = null;
         $startdate = null;
         $enddate = null;
-        $total_credit = Bill::where('type','CR')->sum('amount') ?? 0;
-        $total_debit = Bill::where('type','DR')->sum('amount') ?? 0;
-        $total_grand = $total_credit-$total_debit;
+        $total_credit = Bill::where('type','CR');
+        $total_debit = Bill::where('type','DR');
         $bills = Bill::orderBy('created_at', 'desc');
         if(Auth::user()->type == "manager"){
             $bills->where('user_id',Auth::user()->id);
+            $total_credit->where('user_id',Auth::user()->id);
+            $total_debit->where('user_id',Auth::user()->id);
         }
 
         if($request->manager_id !=""){
             $manager_id =$request->manager_id;
             $bills->where('user_id',$request->manager_id);
+            $total_credit->where('user_id',$request->manager_id);
+            $total_debit->where('user_id',$request->manager_id);
         }
 
         if($request->site_id !=""){
             $site_id =$request->site_id;
             $bills->where('site_id',$request->site_id);
+            $total_credit->where('site_id',$request->site_id);
+            $total_debit->where('site_id',$request->site_id);
         }
 
         if ($request->search !=""){
             $sort_search=$request->search;
             $bills->where(function ($query) use ($sort_search) {
+                $query->orWhereHas('user', function($q2) use ($sort_search) {
+                    $q2->where('name', 'LIKE', "%$sort_search%")->orWhere('phone', 'LIKE', "%$sort_search%");
+                });
+              });
+
+            $total_credit->where(function ($query) use ($sort_search) {
+                $query->orWhereHas('user', function($q2) use ($sort_search) {
+                    $q2->where('name', 'LIKE', "%$sort_search%")->orWhere('phone', 'LIKE', "%$sort_search%");
+                });
+              });
+
+            $total_debit->where(function ($query) use ($sort_search) {
                 $query->orWhereHas('user', function($q2) use ($sort_search) {
                     $q2->where('name', 'LIKE', "%$sort_search%")->orWhere('phone', 'LIKE', "%$sort_search%");
                 });
@@ -49,8 +66,13 @@ class BillController extends Controller
             $startdate =$request->startdate;
             $enddate =$request->enddate;
             $bills->whereBetween('created_at', [$startdate, $enddate]);
+            $total_credit->whereBetween('created_at', [$startdate, $enddate]);
+            $total_debit->whereBetween('created_at', [$startdate, $enddate]);
         }
         $bills = $bills->paginate(10);
+        $total_credit=$total_credit->sum('amount') ?? 0;
+        $total_debit=$total_debit->sum('amount') ?? 0;
+        $total_grand = $total_credit-$total_debit;
         return view('backend.admin.bills.index', compact('bills', 'sort_search','site_id','manager_id','startdate','enddate','total_credit','total_debit','total_grand'));
     }
 

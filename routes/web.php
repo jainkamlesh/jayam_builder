@@ -69,6 +69,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::resource('materials', MaterialController::class);
     Route::get('materials/destory/{id}', [MaterialController::class, 'destroy'])->name('materials.destory');
+    Route::get('lumsum/create_lumsum', [MaterialController::class, 'create_lumsum'])->name('lumsum.create_lumsum');
+    Route::post('lumsum/store_lumsum', [MaterialController::class, 'store_lumsum'])->name('lumsum.store_lumsum');
 });
   
 Route::fallback(function () {

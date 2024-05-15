@@ -43,6 +43,19 @@
           @enderror
         </div>
 
+        <div class="col-sm-12 mt-3 ">
+          <label>Type :</label>
+          <select class="form-control" name="type">
+                  <option value="DR" @if("DR" == $accounting->type) selected @endif>Debit</option>
+                  <option value="CR" @if("CR" == $accounting->type) selected @endif>Credit</option>
+          </select>
+          @error('type')
+            <span class="text-danger" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+          @enderror
+        </div> 
+
         <div class="col-sm-12 mt-3">
           <label>Amount:</label>                            
           <input type="number" min="0" step="0.01" class="form-control" name="amount"  placeholder="Enter Amount" value="{{$accounting->amount}}" id="amounts" onkeyup="gst_credit_cal()">
@@ -54,8 +67,8 @@
         </div>
 
         <div class="col-sm-12 mt-3">
-          <label>GST Credit:</label>                            
-          <input type="number" min="0" readonly  step="0.01" class="form-control" name="gst_credit" id="gst_credit" placeholder="Enter GST Credit" value="{{$accounting->gst_credit}}">
+          <label>GST Amount:</label>                            
+          <input type="number" min="0" readonly  step="0.01" class="form-control" name="gst_credit" id="gst_credit" placeholder="Enter GST Amount" value="{{$accounting->gst_credit}}">
           @error('gst_credit')
               <span class="text-danger" role="alert">
                   <strong>{{ $message }}</strong>
@@ -71,19 +84,6 @@
               @endforeach
           </select>
           @error('inventory_id')
-            <span class="text-danger" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-          @enderror
-        </div> 
-
-        <div class="col-sm-12 mt-3 ">
-          <label>Type :</label>
-          <select class="form-control" name="type">
-                  <option value="DR" @if("DR" == $accounting->type) selected @endif>Debit</option>
-                  <option value="CR" @if("CR" == $accounting->type) selected @endif>Credit</option>
-          </select>
-          @error('type')
             <span class="text-danger" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

@@ -41,9 +41,9 @@
       @if(Auth::user()->type == "admin")
         <table class="mt-4 pro-table-pg table-hover wrapper">
           <tr >
-              <td  data-label="Debit" class="bg-success text-white"><strong>Total Credit : <i class="fa fa-inr"></i> {{$total_credit}}</strong></td>
-              <td  data-label="Credit" class="bg-danger text-white"><strong>Total Debit : <i class="fa fa-inr"></i> {{$total_debit}}</strong></td>
-              <td  data-label="Grand Total" class="bg-primary text-white"><strong>Grand Total : <i class="fa fa-inr"></i> {{$total_grand}}</strong></td>
+              <td  data-label="GST Debit" class="bg-success text-white"><strong>GST Credit : <i class="fa fa-inr"></i> {{$total_credit}}</strong></td>
+              <td  data-label="GST Credit" class="bg-danger text-white"><strong>GST Debit : <i class="fa fa-inr"></i> {{$total_debit}}</strong></td>
+              <td  data-label="Exactement" class="bg-primary text-white"><strong>Exactement : <i class="fa fa-inr"></i> {{$total_grand}}</strong></td>
               <td colspan="5"></td>
           </tr>
         </table>  
@@ -57,7 +57,7 @@
                 <th>Amount</th>
                 <th>GST No</th>
                 <th>GST Percentage</th>
-                <th>GST Credit</th>
+                <th>GST Amount</th>
                 <th>Bill</th>
                 <th>Inventory</th>
                 <th style="width: 230px;">Date</th>
@@ -106,9 +106,9 @@
                 @if(Auth::user()->type == "admin")
                   <tr>
                     <td colspan="8"></td>
-                    <td colspan="1" data-label="Debit" class="bg-success text-white" style="wi"><strong>Total Credit : <i class="fa fa-inr"></i> {{$total_credit}}</strong></td>
-                    <td colspan="1" data-label="Credit" class="bg-danger text-white"><strong>Total Debit : <i class="fa fa-inr"></i> {{$total_debit}}</strong></td>
-                    <td colspan="1" data-label="Grand Total" class="bg-primary text-white"><strong>Grand Total : <i class="fa fa-inr"></i> {{$total_grand}}</strong></td>
+                    <td colspan="1" data-label="GST Credit" class="bg-success text-white" style="wi"><strong>GST Credit : <i class="fa fa-inr"></i> {{$total_credit}}</strong></td>
+                    <td colspan="1" data-label="GST Debit" class="bg-danger text-white"><strong>GST Debit : <i class="fa fa-inr"></i> {{$total_debit}}</strong></td>
+                    <td colspan="1" data-label="Exactement" class="bg-primary text-white"><strong>Exactement : <i class="fa fa-inr"></i> {{$total_grand}}</strong></td>
                   </tr>
                 @endif
             </tbody>

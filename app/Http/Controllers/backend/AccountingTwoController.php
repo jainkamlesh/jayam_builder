@@ -18,27 +18,35 @@ class AccountingTwoController extends Controller
         $site_id = null;
         $startdate = null;
         $enddate = null;
-        $total_credit =AccountingTwo::where('type','CR')->sum('amount') ?? 0;
-        $total_debit =AccountingTwo::where('type','DR')->sum('amount') ?? 0;
-        $total_grand = $total_credit-$total_debit;
+        $total_credit =AccountingTwo::where('type','CR');
+        $total_debit =AccountingTwo::where('type','DR');
         $accounting =AccountingTwo::orderBy('created_at', 'desc');
 
         if($request->site_id !=""){
             $site_id =$request->site_id;
             $accounting->where('site_id',$request->site_id);
+            $total_credit->where('site_id',$request->site_id);
+            $total_debit->where('site_id',$request->site_id);
         }
 
         if ($request->search !=""){
             $sort_search=$request->search;
             $accounting->where('site_name', 'LIKE', "%$sort_search%");
+            $total_credit->where('site_name', 'LIKE', "%$sort_search%");
+            $total_debit->where('site_name', 'LIKE', "%$sort_search%");
         }
 
         if($request->startdate!="" && $request->enddate!=""){
             $startdate =$request->startdate;
             $enddate =$request->enddate;
             $accounting->whereBetween('accounting_date', [$startdate, $enddate]);
+            $total_credit->whereBetween('accounting_date', [$startdate, $enddate]);
+            $total_debit->whereBetween('accounting_date', [$startdate, $enddate]);
         }
         $accounting = $accounting->paginate(10);
+        $total_credit=$total_credit->sum('gst_credit') ?? 0;
+        $total_debit=$total_debit->sum('gst_credit') ?? 0;
+        $total_grand = $total_credit-$total_debit;
         return view('backend.admin.accountingtwo.index', compact('accounting', 'sort_search','site_id','startdate','enddate','total_credit','total_debit','total_grand'));
     }
 

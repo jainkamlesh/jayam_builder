@@ -42,6 +42,19 @@
               @enderror
             </div>
 
+            <div class="col-sm-12 mt-3 ">
+              <label>Type :</label>
+              <select class="form-control" name="type">
+                      <option value="DR">Debit</option>
+                      <option value="CR">Credit</option>
+              </select>
+              @error('type')
+                <span class="text-danger" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div> 
+
             <div class="col-sm-12 mt-3">
               <label>Amount:</label>                            
               <input type="number" min="0" value="0" step="0.01" class="form-control" name="amount" id="amount" placeholder="Enter Amount" onkeyup="gst_credit_cal()">
@@ -53,8 +66,8 @@
             </div>
 
             <div class="col-sm-12 mt-3">
-              <label>GST Credit:</label>                            
-              <input type="number" min="0" readonly value="0" step="0.01" class="form-control" name="gst_credit" id="gst_credit" placeholder="Enter GST Credit">
+              <label>GST Amount:</label>                            
+              <input type="number" min="0" readonly value="0" step="0.01" class="form-control" name="gst_credit" id="gst_credit" placeholder="Enter GST Amount">
               @error('gst_credit')
                   <span class="text-danger" role="alert">
                       <strong>{{ $message }}</strong>
@@ -70,19 +83,6 @@
                   @endforeach
               </select>
               @error('inventory_id')
-                <span class="text-danger" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-              @enderror
-            </div> 
-
-            <div class="col-sm-12 mt-3 ">
-              <label>Type :</label>
-              <select class="form-control" name="type">
-                      <option value="DR">Debit</option>
-                      <option value="CR">Credit</option>
-              </select>
-              @error('type')
                 <span class="text-danger" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>

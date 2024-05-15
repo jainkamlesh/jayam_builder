@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('materials', function (Blueprint $table) {
+        Schema::create('lumsum_paids', function (Blueprint $table) {
             $table->id();
-            $table->string('material_name')->nullable();
             $table->integer('dealer_id')->nullable();
             $table->string('dealer_name')->nullable();
-            $table->string('quantity')->nullable();
             $table->string('bill_no')->nullable();
-            $table->string('gadi_no')->nullable();
-            $table->string('image')->nullable();
+            $table->dateTime('paid_date')->nullable();
             $table->integer('user_id')->nullable();
             $table->string('amount')->nullable();
             $table->timestamps();
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('materials');
+        Schema::dropIfExists('lumsum_paids');
     }
 };
