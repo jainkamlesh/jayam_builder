@@ -47,6 +47,10 @@
       $('[data-toggle="tooltip"]').tooltip();   
     });
 
+     $('.printMe').click(function(){
+        window.print()
+      });
+
     $(".animated-progress span").each(function () {
       $(this).animate(
         {

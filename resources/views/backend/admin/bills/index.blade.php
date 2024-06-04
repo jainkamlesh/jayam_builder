@@ -39,10 +39,11 @@
                 <a class="btn btn-danger radius-0 w-50" href="{{route('bills.index')}}"><i class="fa fa-remove"></i></a>
               </div>
             </div>
-            <div class="d-flex justify-content-between align-items-center container-fluid pro-add-nnb bill-button">
+            <div class="d-flex justify-content-end align-items-center container-fluid pro-add-nnb bill-button">
               <div class="d-flex position-relative">
               </div>
               <a href="{{route('bills.create')}}"><button class="btn-add add-btn" type="button"><i class="fa fa-plus" aria-hidden="true"></i>Add Bill</button></a>
+              <button class="btn-add add-btn mx-2 printMe" type="button"><i class="fa fa-print" aria-hidden="true"></i>Print</button>
             </div>
           @else
             <div class="d-flex justify-content-between align-items-center container-fluid mt-4 pro-add-nnb">
@@ -57,7 +58,7 @@
             </div>  
           @endif        
     </form>
-    <div class="container-fluid">
+    <div class="container-fluid" id="outprint">
       @if(Auth::user()->type == "admin")
       <table class="mt-4 pro-table-pg table-hover wrapper">
         <tr >

@@ -39,8 +39,9 @@
               <div class="d-flex position-relative">
                 <a href="{{route('materials.create')}}"><button class="btn-add add-btn" style="width: 180px;" type="button"><i class="fa fa-plus" aria-hidden="true"></i>Add Material</button></a>
                 @if(Auth::user()->type == "admin")
-                  <a href="{{route('lumsum.create_lumsum')}}"><button class="btn-add add-btn" style="width: 180px;" type="button"><i class="fa fa-plus" aria-hidden="true"></i>Lumsum Paid</button></a>
+                  <a href="{{route('lumsum.create_lumsum')}}"><button class="btn-add add-btn mx-2" style="width: 180px;" type="button"><i class="fa fa-plus" aria-hidden="true"></i>Lumsum Paid</button></a>
                 @endif
+                <button class="btn-add add-btn printMe" type="button" style="width: 180px;"><i class="fa fa-print" aria-hidden="true"></i>Print</button>
               </div>
            
           </div>

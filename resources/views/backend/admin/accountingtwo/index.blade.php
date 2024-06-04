@@ -31,10 +31,11 @@
               <a class="btn btn-danger radius-0 w-50" href="{{route('accountingtwo.index')}}"><i class="fa fa-remove"></i></a>
            </div>
           </div>
-          <div class="d-flex justify-content-between align-items-center container-fluid pro-add-nnb bill-button">
+          <div class="d-flex justify-content-end align-items-center container-fluid pro-add-nnb bill-button">
             <div class="d-flex position-relative">
             </div>
              <a href="{{route('accountingtwo.create')}}"><button class="btn-add add-btn" type="button"><i class="fa fa-plus" aria-hidden="true"></i>Add Accounting</button></a>
+             <button class="btn-add add-btn printMe mx-2" type="button" ><i class="fa fa-print" aria-hidden="true"></i>Print</button>
           </div>        
     </form>
     <div class="container-fluid">
